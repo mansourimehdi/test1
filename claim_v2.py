@@ -40,7 +40,7 @@ def get_geo_airport(iata):
         return "Added %d items from RDS MySQL table" % (item_count)
 
 
-# --- Lufthansa Oauth 2.0 variables ---
+# --- Lufthansa Oauth 2.0 variables --- test
 lh_key_access = "xgav2g93f5rgxtbzaqcmcer7"
 lh_key_secret = "xP82czFt4D"
 lh_oauth_url = "https://api.lufthansa.com/v1/oauth/token"
