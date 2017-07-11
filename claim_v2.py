@@ -7,6 +7,7 @@ import logging
 import requests
 import sys
 import rds_config
+import api_config
 import pymysql
 from geopy.distance import great_circle
 
@@ -40,22 +41,22 @@ def get_geo_airport(iata):
         return "Added %d items from RDS MySQL table" % (item_count)
 
 
-# --- Lufthansa Oauth 2.0 variables --- test
-lh_key_access = "xgav2g93f5rgxtbzaqcmcer7"
-lh_key_secret = "xP82czFt4D"
-lh_oauth_url = "https://api.lufthansa.com/v1/oauth/token"
-lh_grant_type = "client_credentials"
-lh_authorization_code = ""
-lh_access_token = ""
+# --- Lufthansa Oauth 2.0 variables ---
+lh_key_access = api_config.lh_key_access
+lh_key_secret = api_config.lh_key_secret
+lh_oauth_url = api_config.lh_oauth_url
+lh_grant_type = api_config.lh_grant_type
+lh_authorization_code = api_config.lh_authorization_code
+lh_access_token = api_config.lh_access_token
 
 
 # --- AirFrance KLM Oauth 2.0 variables ---
-af_key_access = "vb9g2vx9b74m8wb4hsfx9es7"
-af_key_secret = "BBpTqufDhw"
-af_oauth_url = "https://developer.airfranceklm.com/v1/oauth/token"
-af_grant_type = "client_credentials"
-af_authorization_code = ""
-af_access_token = ""
+af_key_access = api_config.af_key_access
+af_key_secret = api_config.af_key_secret
+af_oauth_url = api_config.af_oauth_url
+af_grant_type = api_config.af_grant_type
+af_authorization_code = api_config.af_authorization_code
+af_access_token = api_config.af_access_token
 
 # --- define possible intent ---
 knowledge_base = {'UserCreationHelper': 'Please, click here: https://identity.iata.org/s/login/SelfRegister',
