@@ -398,23 +398,17 @@ operates the flight and where a community carrier is defined as any carrier lice
 Or 
 2- departing from an EU member state.
 '''
-
-
 def is_dep_airport_ok(dep_airport):
     is_applicable = True
     return is_applicable
-
 
 ''' 
 check if the arrival airport is applicable based on UE261 2004:
 1- travelling to an EU member state on an airline based in an EU member state.
 '''
-
-
 def is_arr_airport_ok(arr_airport):
     is_applicable = True
     return is_applicable
-
 
 '''
 check if that person has a confirmed reservation on the flight:
