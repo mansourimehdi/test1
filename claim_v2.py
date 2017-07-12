@@ -16,7 +16,6 @@ from geopy.distance import great_circle
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-
 def get_mysql_conn():
     # rds settings
     rds_host = "openflights.cv0ia5enr12d.us-east-1.rds.amazonaws.com"
@@ -25,7 +24,6 @@ def get_mysql_conn():
     db_name = rds_config.db_name
     conn = pymysql.connect(rds_host, port=3306, user=name, passwd=password, db=db_name)
     return conn
-
 
 def get_geo_airport(iata):
     conn = get_mysql_conn()
@@ -40,7 +38,6 @@ def get_geo_airport(iata):
     else:
         return "Added %d items from RDS MySQL table" % (item_count)
 
-
 # --- Lufthansa Oauth 2.0 variables ---
 lh_key_access = api_config.lh_key_access
 lh_key_secret = api_config.lh_key_secret
@@ -48,7 +45,6 @@ lh_oauth_url = api_config.lh_oauth_url
 lh_grant_type = api_config.lh_grant_type
 lh_authorization_code = api_config.lh_authorization_code
 lh_access_token = api_config.lh_access_token
-
 
 # --- AirFrance KLM Oauth 2.0 variables ---
 af_key_access = api_config.af_key_access
@@ -64,10 +60,7 @@ knowledge_base = {'UserCreationHelper': 'Please, click here: https://identity.ia
                   'ClaimForDeniedBoarding': 'your token id is:'
                   }
 
-
 # --- Helpers that build all of the responses ---
-
-
 def elicit_slot(session_attributes, intent_name, slots, slot_to_elicit, message):
     return {
         'sessionAttributes': session_attributes,
@@ -80,7 +73,6 @@ def elicit_slot(session_attributes, intent_name, slots, slot_to_elicit, message)
         }
     }
 
-
 def confirm_intent(session_attributes, intent_name, slots, message):
     return {
         'sessionAttributes': session_attributes,
@@ -91,7 +83,6 @@ def confirm_intent(session_attributes, intent_name, slots, message):
             'message': message
         }
     }
-
 
 def close(session_attributes, fulfillment_state, message):
     response = {
@@ -105,7 +96,6 @@ def close(session_attributes, fulfillment_state, message):
 
     return response
 
-
 def delegate(session_attributes, slots):
     return {
         'sessionAttributes': session_attributes,
@@ -115,10 +105,7 @@ def delegate(session_attributes, slots):
         }
     }
 
-
 # --- Helper Functions ---
-
-
 def safe_int(n):
     """
     Safely convert n value to int.
@@ -126,7 +113,6 @@ def safe_int(n):
     if n is not None:
         return int(n)
     return n
-
 
 def try_ex(func):
     """
@@ -141,14 +127,12 @@ def try_ex(func):
     except KeyError:
         return None
 
-
 def isvalid_city(city):
     valid_cities = ['new york', 'los angeles', 'chicago', 'houston', 'philadelphia', 'phoenix', 'san antonio',
                     'san diego', 'dallas', 'san jose', 'austin', 'jacksonville', 'san francisco', 'indianapolis',
                     'columbus', 'fort worth', 'charlotte', 'detroit', 'el paso', 'seattle', 'denver', 'washington dc',
                     'memphis', 'boston', 'nashville', 'baltimore', 'portland']
     return city.lower() in valid_cities
-
 
 def isvalid_date(date):
     try:
@@ -157,18 +141,15 @@ def isvalid_date(date):
     except ValueError:
         return False
 
-
 def get_day_difference(later_date, earlier_date):
     later_datetime = dateutil.parser.parse(later_date).date()
     earlier_datetime = dateutil.parser.parse(earlier_date).date()
     return abs(later_datetime - earlier_datetime).days
 
-
 def add_days(date, number_of_days):
     new_date = dateutil.parser.parse(date).date()
     new_date += datetime.timedelta(days=number_of_days)
     return new_date.strftime('%Y-%m-%d')
-
 
 def build_validation_result(isvalid, violated_slot, message_content):
     return {
@@ -176,7 +157,6 @@ def build_validation_result(isvalid, violated_slot, message_content):
         'violatedSlot': violated_slot,
         'message': {'contentType': 'PlainText', 'content': message_content}
     }
-
 
 def validate_book_car(slots):
     pickup_city = try_ex(lambda: slots['PickUpCity'])
@@ -230,10 +210,7 @@ def validate_book_car(slots):
 
     return {'isValid': True}
 
-
 """ --- Functions that control the bot's behavior --- """
-
-
 def book_car(intent_request):
     """
     Performs dialog management and fulfillment for booking a car.
@@ -387,7 +364,6 @@ def book_car(intent_request):
             'content': 'Thanks, I have placed your reservation.'
         }
     )
-
 
 # --------------------------- START CHECK PASSANGER APPLICABLE -------------------------------------------------------
 ''' check if the departure airport is applicable based on UE261 2004:
